@@ -1,24 +1,39 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## This demo project demostrates Angular 13 compatibility problems with Webpack 6
 
-Things you may want to cover:
+```
+git clone https://github.com/SamShekhovtsov/demo-webpa-k6-angular13.git
+cd demo-webpa-k6-angular13
+bundle install
+rails s
+```
 
-* Ruby version
+browse http://localhost:3000
 
-* System dependencies
+The Angular application lives in the app/packs/hello_angular
 
-* Configuration
+There is a simple service defined in the app/packs/hello_angular/app/sheroes/hero.service.ts
+This service has correct Angular decorator (attribute)
 
-* Database creation
+```
+@Injectable({
+  providedIn: 'root',
+})
+export class HeroService {
+    ...
+}
+```
 
-* Database initialization
+however, when opening the application in browser, error appears in the console: 
 
-* How to run the test suite
+```
+ERROR Error: Uncaught (in promise): Error: This constructor is not compatible with Angular Dependency Injection because its dependency at index 0 of the parameter list is invalid.
+This can happen if the dependency type is a primitive like a string or if an ancestor of this class is missing an Angular decorator.
 
-* Services (job queues, cache servers, search engines, etc.)
+Please check that 1) the type for the parameter at index 0 is correct and 2) the correct Angular decorators are defined for this class and its ancestors.
+Error: This constructor is not compatible with Angular Dependency Injection because its dependency at index 0 of the parameter list is invalid.
+This can happen if the dependency type is a primitive like a string or if an ancestor of this class is missing an Angular decorator.
 
-* Deployment instructions
-
-* ...
+Please check that 1) the type for the parameter at index 0 is correct and 2) the correct Angular decorators are defined for this class and its ancestors.
+```
